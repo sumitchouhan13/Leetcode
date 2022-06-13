@@ -14,7 +14,7 @@ class Solution {
             return dp[i][j];
         }
         int down = triangle.get(i).get(j) + recursion(i + 1 , j , triangle , dp);
-        int right = triangle.get(i).get(j) + recursion(i + 1 , j + 1 , triangle , dp);
+        int right = triangle.get(i).get(j) +  recursion(i + 1 , j + 1 , triangle , dp);
         return dp[i][j] = Math.min(down , right);
     }
 }

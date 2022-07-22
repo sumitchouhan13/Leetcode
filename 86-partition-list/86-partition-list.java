@@ -14,12 +14,11 @@ class Solution {
         ListNode before = before_head;
         ListNode after_head = new ListNode(0);
         ListNode after = after_head;
-
-        while (head != null) {
-            if (head.val < x) {
+        while(head != null){
+            if(head.val < x){
                 before.next = head;
                 before = before.next;
-            } else {
+            }else{
                 after.next = head;
                 after = after.next;
             }

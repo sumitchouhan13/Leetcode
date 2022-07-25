@@ -1,5 +1,12 @@
 class Solution {
     public long zeroFilledSubarray(int[] nums) {
+        //Just observe the pattern of the zeroes starting from first zero
+        // 1 -> 1
+        // 2 -> 3
+        // 3 -> 6
+        // 4 -> 10
+        // and so on
+        // so the problem boils down to finding the max number of zeros from the subarray and calculating the total answer from it, the dp is the current index + dp[i - 1]
         long count = 0;
         int n = nums.length;
         HashMap<Long , Long> hm = new HashMap<>();

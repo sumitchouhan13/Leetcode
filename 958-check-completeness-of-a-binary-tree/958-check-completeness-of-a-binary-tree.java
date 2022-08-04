@@ -17,23 +17,17 @@ class Solution {
     public boolean isCompleteTree(TreeNode root) {
         Queue<TreeNode> q = new LinkedList<>();
         q.offer(root);
+        boolean found = false;
         while(!q.isEmpty()){
-            int size = q.size();
-            for(int i = 0 ; i < size ; i++){
-                TreeNode temp = q.poll();
-                if(temp.left != null){
-                    q.offer(temp.left);
-                }else{
-                    if(temp.right != null){
-                        return false;
-                    }
+            TreeNode temp = q.poll();
+            if(temp == null){
+                found = true;
+            }else{
+                if(found){
+                    return false;
                 }
-                if(temp.right != null){
-                    q.offer(temp.right);
-                }else{
-                    if(q.peek()!=null && (q.peek().left!=null || q.peek().right!=null))
-                        return false;
-                }
+                q.offer(temp.left);
+                q.offer(temp.right);
             }
         }
         return true;

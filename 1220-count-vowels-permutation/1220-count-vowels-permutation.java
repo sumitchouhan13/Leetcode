@@ -1,4 +1,5 @@
 class Solution {
+    //Explanation in the lecture of neetcode
     int mod = 1000000007;
     public int countVowelPermutation(int n) {
         int[][] dp = new int[5][n];

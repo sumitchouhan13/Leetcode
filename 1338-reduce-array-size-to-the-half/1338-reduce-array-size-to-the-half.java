@@ -1,5 +1,6 @@
 class Solution {
     public int minSetSize(int[] arr) {
+        // We are just iterating over the array and storing the frequencies of the elements in the hashmap and after that we are storing the values of the elements in the max heap and start removing the elements with the maximum frequency until the size of the array is at least half
         int n = arr.length;
         if(n == 1 || n == 2){
             return 1;

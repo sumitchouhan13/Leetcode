@@ -1,27 +1,34 @@
 class Solution {
-    public boolean isPossible(int[] nums) {
-        Map<Integer, PriorityQueue<Integer>> map = new HashMap<>(); // key -> last value of the subsequence, val -> number of elements in that subsequence (size of the subsequence). There can be one or more than one subsequence which last value is same.
+    public boolean isPossible(int[] A) {
+        Map<Integer, Integer> left = new HashMap<>();
+        Map<Integer, Integer> end = new HashMap<>();
         
-        for(int i: nums){
+        for (int a: A) left.put(a, left.getOrDefault(a, 0) + 1);
+        for (int a: A) {
+            if (left.get(a) <= 0) continue;
             
-            int n = 0; // number of elements in the subsequence which last value is (i-1). 0 in case of if there is no subsequence which last value is (i-1).
-            if(map.containsKey(i-1)){
-                
-                Queue<Integer> pq = map.get(i-1);
-                n = pq.poll(); // number of elements in the subsequence which last value is (i-1). 
-                if(pq.isEmpty()) map.remove(i-1); // if now PriorityQueue is empty i.e. there is no subsequence which last value is (i-1) because we are appending (i) to this subsequence.
+            left.put(a, left.get(a) - 1);
+            
+            // place a in an existing subsequence if possible
+            if (end.containsKey(a-1) && end.get(a-1) > 0) {
+                end.put(a-1, end.get(a-1) - 1);
+                end.put(a, end.getOrDefault(a, 0) + 1);
+                continue;
             }
-            if(!map.containsKey(i)) map.put(i, new PriorityQueue<>());
-            map.get(i).add(n+1);
+            
+            // place a in a new subsequence
+            if (left.containsKey(a+1) && left.get(a+1) > 0 && 
+                left.containsKey(a+2) && left.get(a+2) > 0) {
+                left.put(a+1, left.get(a+1) - 1);
+                left.put(a+2, left.get(a+2) - 1);
+                end.put(a+2, end.getOrDefault(a+2, 0) + 1);
+                continue;
+            }
+            
+            // don't know where to place a? ---> false
+            return false;
         }
         
-        for(PriorityQueue<Integer> pq: map.values()){
-            
-            while(!pq.isEmpty()){
-                
-                if(pq.poll() < 3) return false;
-            }
-        }
         return true;
     }
 }

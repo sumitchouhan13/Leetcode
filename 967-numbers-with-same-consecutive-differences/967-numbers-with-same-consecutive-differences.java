@@ -18,7 +18,7 @@ class Solution {
         if(digit + k <= 9){
             dfs(num * 10 + (digit + k) , digit + k , n - 1 , k , res);
         }
-        if(k != 0 && digit - k >= 0){
+        if(k != 0 && (digit - k) >= 0){
             dfs(num * 10 + (digit - k) , digit - k , n - 1 , k , res);
         }
     }

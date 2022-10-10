@@ -10,11 +10,11 @@ class Solution {
         for (int i = 0; i < length / 2; i++) {
             if (palindromeArray[i] != 'a') {
                 palindromeArray[i] = 'a';
-                return String.valueOf(palindromeArray);
+                return new String(palindromeArray);
             }
         }
         
         palindromeArray[length - 1] = 'b';
-        return String.valueOf(palindromeArray);
+        return new String(palindromeArray);
     }
 }
